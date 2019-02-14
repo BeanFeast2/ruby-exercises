@@ -1,17 +1,17 @@
 class Dragon
-  attr_accessor :name, :color, :rider
+  attr_accessor :name, :color, :rider, :belly_size
   def initialize(n, c, r)
     self.name = n
     self.color = c
     self.rider = r
-    @belly_size = 1
+    self.belly_size = 1
   end
 
   def eat
-    @belly_size += 1
+    self.belly_size += 1
   end
 
   def hungry?
-    @belly_size > 3 ? false : true
+    self.belly_size <= 3
   end
 end
