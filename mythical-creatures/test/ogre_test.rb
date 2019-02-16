@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'pry'
 require_relative '../lib/ogre'
 
 class OgreTest < Minitest::Test
@@ -9,19 +10,16 @@ class OgreTest < Minitest::Test
   end
 
   def test_it_can_live_somewhere_by_default
-    skip
     ogre = Ogre.new('Brak')
     assert_equal 'Swamp', ogre.home
   end
 
   def test_it_doesnt_have_to_live_in_a_swamp
-    skip
     ogre = Ogre.new('Brak', 'The Ritz')
     assert_equal 'The Ritz', ogre.home
   end
 
   def test_it_can_meet_humans
-    skip
     ogre = Ogre.new('Brak')
     human = Human.new
     assert_equal 'Jane', human.name
@@ -30,7 +28,6 @@ class OgreTest < Minitest::Test
   end
 
   def test_humans_only_notices_ogre_every_third_encounter
-    skip
     ogre = Ogre.new('Brak')
     human = Human.new
 
@@ -40,10 +37,11 @@ class OgreTest < Minitest::Test
 
     ogre.encounter(human)
     assert human.notices_ogre?
+    ogre.encounter(human)
+    refute human.notices_ogre?
   end
 
   def test_human_notices_ogre_the_sixth_time
-    skip
     ogre = Ogre.new('Brak')
     human = Human.new
 
@@ -55,7 +53,6 @@ class OgreTest < Minitest::Test
   end
 
   def test_it_can_swing_a_club
-    skip
     ogre = Ogre.new('Brak')
     human = Human.new
     ogre.swing_at(human)
@@ -63,7 +60,6 @@ class OgreTest < Minitest::Test
   end
 
   def test_it_swings_the_club_when_the_human_notices_it
-    skip
     ogre = Ogre.new('Brak')
     human = Human.new
     ogre.encounter(human)
@@ -78,7 +74,6 @@ class OgreTest < Minitest::Test
   end
 
   def test_it_hits_the_human_every_second_time_it_swings
-    skip
     ogre = Ogre.new('Brak')
     human = Human.new
 
@@ -92,10 +87,10 @@ class OgreTest < Minitest::Test
   end
 
   def test_human_wakes_up_when_ogre_apologizes
-    skip
     ogre = Ogre.new('Brak')
     human = Human.new
-
+    6.times{ ogre.encounter(human) }
+    assert human.knocked_out?
     ogre.apologize(human)
     refute human.knocked_out?
   end
