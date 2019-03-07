@@ -1,3 +1,6 @@
+require_relative 'bag'
+require_relative 'candy'
+
 class Bag
   attr_accessor :candies
   def initialize
@@ -26,14 +29,9 @@ class Bag
     end
   end
 
-  def grab(candy_type)
-    @candies.each_with_index do |candy,i|
-      if candy.type == candy_type
-        pulled_candy = @candies[i]
-        @candies.delete_at(i)
-        return pulled_candy
-      end
-    end
+  def grab(type)
+    candy = @candies.find{|candy| candy.type}
+    @candies.delete(candy)
   end
 
   def take(candy_amount)
