@@ -1,26 +1,26 @@
 class Medusa
   attr_accessor :name, :statues
   def initialize(n)
-    self.name = n
-    self.statues = []
+    @name = n
+    @statues = []
   end
 
   def stare(victim)
-    self.statues << victim
+    @statues << victim
     victim.stoned = true
     #Assigns first element in array false then removes it if statues.length > 3
-    self.statues.shift.stoned = false if self.statues.length == 4
+    @statues.shift.stoned = false if @statues.length == 4
   end
 end
 
 class Person
   attr_accessor :name, :stoned
   def initialize(n)
-    self.name = n
-    self.stoned = false
+    @name = n
+    @stoned = false
   end
 
   def stoned?
-    self.stoned
+    @stoned
   end
 end
